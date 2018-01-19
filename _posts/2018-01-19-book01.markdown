@@ -4,6 +4,7 @@ title:  "일취월장 강의 필기"
 date:   2018-01-19
 categories: lecture
 tags: motivation 
+comments: true
 ---
 
 Summary
