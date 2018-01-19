@@ -5,7 +5,7 @@ paginate_path: "page:num"
 exclude: ["README.md"] # files to exclude
 highlighter: rouge
 markdown: kramdown
-disqus: dbyll
+disqus: suprech
 google_analytics: dbyll
 title: suprech
 
@@ -38,3 +38,4 @@ BASE_PATH:
 
 plugins:
   - jekyll-paginate
+
