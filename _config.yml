@@ -5,7 +5,7 @@ paginate_path: "page:num"
 exclude: ["README.md"] # files to exclude
 highlighter: rouge
 markdown: kramdown
-disqus: suprech
+disqus: suprech-code
 google_analytics: dbyll
 title: suprech
 
