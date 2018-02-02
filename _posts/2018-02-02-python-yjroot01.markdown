@@ -83,6 +83,13 @@ def test_search(f_wsgi, f_client):
 
 <br>
 
+#### pytest 실행하기
+프로젝트 폴더 안에 tests라는 폴더를 만든다.
+tests폴더 안에 test_[api명].py 파일을 만든다.
+
+
+
+
 ### 3. Database 설치하기
 #### postgresapp 설치하기
 이번 프로젝트에선 MySQL이 아닌 PostgreSQL을 사용한다. 
@@ -115,16 +122,55 @@ Database를 위한 git이라고 보면 된다. pip로 설치한다. ```$ pip ins
 
 ### 4. 프로젝트 구성도
 
+* ~~alembic.ini~~
+* run.py => 실행파일
+* requirements.txt => ```pip install -r requirements.txt```
+* winstar => 핵심부분 
+    * api => 기능 구현부분
+        * status.py => 테스트용
+        * user.py => user가 이미 가입했는지 체크 / 가입 절차 진행 / 로그인 진행
+    * db.py => db를 쓰려면 이놈을 import해서 쓰면 된다.
+    * ~~migrations~~
+    * models => DB 설계
+        * event.py
+        * item.py
+        * order.py
+        * user.py
+    * ~~utils.py~~
+    * wsgi.py => wsgi를 쓸땐 이놈을 import해서 쓰면 된다. 블루프린트 등록을 여기서한다.
+* tests => pytest를 위한 폴더
+    * conftest.py
+    * helper.py => 그냥 api테스트시, from ..helper import url하자.
+    * api => 사용할 DB를 import하고, helper를 import한 뒤 test case를 작성한다.
+        * test_status.py
+        * test_user.py
+
 <br>
 <br>
-
-
-
 
 ### 그 외 기타 사항들..
 #### wsgi란 무엇인가
 wsgi란 Web Server Gateway Interface의 약자이다. 웹 서버가 웹 어플리케이션과 어떻게 통신을 할지를 규정하는 python standard이다.
 
+블루프린트 등록을 여기서 한다. 참고코드
+
+```python
+from flask import Flask
+
+# 작성한 api추가하는부분
+from winstar.api.status import app as api_status
+from winstar.api.user import app as api_user
+
+
+def create_wsgi():
+    app = Flask(__name__)
+    # 위에서 from ~ import한걸 실질적으로 등록하는부분
+    app.register_blueprint(api_status)
+    app.register_blueprint(api_user)
+
+    return app
+
+```
 <br>
 
 #### 블루프린트란?
@@ -154,8 +200,16 @@ agrep같은, recursive하게 PATH의 pattern을 찾는 프로그램이다. mac�
 
 <br>
 
+#### ```.py``` 파일을 executable하게 만들기 위해, ```chmod``` 쓰는법
+기본적으로 ```.py```파일을 만들면 ```-rw-r--r--```로 만들어지는데, 이를 실행가능하게 해야한다.
+다음의 명령을 터미널에 입력한다.
+```chmod +x ./[파일명].py```
+그러면 퍼미션은 다음과 같이 바뀐다. ```-rwxr-xr-x```
+
+<br>
+
 #### python에 실행권한을 줘서 실행시키기
-이런방식으로 실행하기 위해선, 이 파일의 권한이 executable이어야 한다. 다음 문단을 참고하도록 하자.
+이런방식으로 실행하기 위해선, 이 파일의 권한이 executable이어야 한다. 방금 전 문단을 참고하도록 하자.
 
 python 코드가 다음과 같을때(파일명은 asd.py라 하자.)
 ```python
@@ -173,17 +227,20 @@ os.environ에 PROD를 넘겨주려면, 터미널에서 다음의 명령어로 �
 ```$ MODE=PROD ./asd.py``` 이 경우 결과는 hello가 나올것이다.
 ```$ ./asd.py``` 이 경우 결과는 aaa가 나올것이다.
 
+<br>
 
-#### ```.py``` 파일을 executable하게 만들기 위해, ```chmod``` 쓰는법
-기본적으로 ```.py```파일을 만들면 ```-rw-r--r--```로 만들어지는데, 이를 실행가능하게 해야한다.
-다음의 명령을 터미널에 입력한다.
-```chmod +x ./[파일명].py```
-그러면 퍼미션은 다음과 같이 바뀐다. ```-rwxr-xr-x```
+#### 자잘한 tmux기능
+```Ctrl + s + z ``` 를 누르면, 반으로 쪼개졌던 화면이 하나로 된다.
 
 <br>
 <br>
 
 ### 02/02 오늘 한 일 정리
+1. 개발환경 세팅
+2. git 등록
+3. pytest 사용법
+4. 사용자가 가입 요청시, 가입이 되어있는지 안되어있는지를 체크하는 부분 구현(alreay_signin)
+
 
 <br>
 <br>
@@ -194,3 +251,4 @@ os.environ에 PROD를 넘겨주려면, 터미널에서 다음의 명령어로 �
 * signin api 추가하기 (password체크 True/False반환하도록.)
 * branch만든 뒤 pull request하기
 * DB 정규화 공부하기 [참고 링크](http://gomcine.tistory.com/entry/Database-9-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%A0%95%EA%B7%9C%ED%99%94-%EA%B0%9C%EB%85%90-%EB%B0%8F-%EB%B0%A9%EB%B2%95)
+
