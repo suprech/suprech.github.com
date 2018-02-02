@@ -238,6 +238,14 @@ os.environ에 PROD를 넘겨주려면, 터미널에서 다음의 명령어로 �
 ```Ctrl + s + z ``` 를 누르면, 반으로 쪼개졌던 화면이 하나로 된다.
 
 <br>
+
+#### pull request 참조사이트
+[Fork, Pull Request 개념](http://mobicon.tistory.com/170)
+
+[git 초보를 위한 풀리퀘스트(pull request) 방법](https://wayhome25.github.io/git/2017/07/08/git-first-pull-request-story/)
+
+
+<br>
 <br>
 
 ## 02/02 오늘 한 일 정리
