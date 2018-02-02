@@ -50,7 +50,7 @@ alias mkvirtualenv2="mkvirtualenv -p/usr/local/bin/python2"
 <br>
 <br>
 
-### 2. pytest 설치하기
+### 2. pytest
 #### TDD 코딩 방법론
 TDD란, Test-driven development의 약자로서 정확한 프로그래밍 목적을 디자인 단계에서 반드시 미리 정의하는 개발방법을 말한다.
 
@@ -63,6 +63,8 @@ TDD란, Test-driven development의 약자로서 정확한 프로그래밍 목적
 
 #### pytest
 pytest는 python에서 TDD방법론으로 개발을 할 수 있도록 도와주는 툴이다.
+
+[pytest 공식문서](https://docs.pytest.org/en/latest/index.html)
 
 <br>
 
@@ -86,9 +88,13 @@ def test_search(f_wsgi, f_client):
 #### pytest 실행하기
 프로젝트 폴더 안에 tests라는 폴더를 만든다.
 tests폴더 안에 test_[api명].py 파일을 만든다.
+(구분을 쉽게하기 위함이다. 실질적으로 어떤 api의 어떤 기능을 실행할지는 
+```res = f_client.get(url(f_wsgi, 'status.ping'))```
+과 같은 코드에 의해 결정된다.) 알아서 우리의 wsgi.py를 찾아서, 여기서 블루프린트를 읽어서 잘 연결시켜서 테스트한다.
+우리는 그저 프로젝트 최상위 폴더에서 ```$ pytest```를 입력하면 된다.
 
-
-
+<br>
+<br>
 
 ### 3. Database 설치하기
 #### postgresapp 설치하기
@@ -120,7 +126,7 @@ Database를 위한 git이라고 보면 된다. pip로 설치한다. ```$ pip ins
 <br>
 <br>
 
-### 4. 프로젝트 구성도
+## 프로젝트 구성도
 
 * ~~alembic.ini~~
 * run.py => 실행파일
@@ -148,11 +154,11 @@ Database를 위한 git이라고 보면 된다. pip로 설치한다. ```$ pip ins
 <br>
 <br>
 
-### 그 외 기타 사항들..
+## 그 외 기타 사항들..
 #### wsgi란 무엇인가
 wsgi란 Web Server Gateway Interface의 약자이다. 웹 서버가 웹 어플리케이션과 어떻게 통신을 할지를 규정하는 python standard이다.
 
-블루프린트 등록을 여기서 한다. 참고코드
+블루프린트 등록을 여기서 한다. 참고코드(wsgi.py)
 
 ```python
 from flask import Flask
@@ -169,7 +175,6 @@ def create_wsgi():
     app.register_blueprint(api_user)
 
     return app
-
 ```
 <br>
 
@@ -235,7 +240,7 @@ os.environ에 PROD를 넘겨주려면, 터미널에서 다음의 명령어로 �
 <br>
 <br>
 
-### 02/02 오늘 한 일 정리
+## 02/02 오늘 한 일 정리
 1. 개발환경 세팅
 2. git 등록
 3. pytest 사용법
@@ -245,7 +250,7 @@ os.environ에 PROD를 넘겨주려면, 터미널에서 다음의 명령어로 �
 <br>
 <br>
 
-### Todo
+## Todo
 * SQL Alchemy 공식문서 읽어보기. [공식문서 링크](http://docs.sqlalchemy.org/)
 * signup api 추가하기
 * signin api 추가하기 (password체크 True/False반환하도록.)
