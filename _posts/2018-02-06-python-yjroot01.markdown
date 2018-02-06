@@ -52,7 +52,7 @@ signup 브랜치를 origin 원격저장소에 push한다.
 
 다음은 item.py의 Item class를 수정한 예 이다.
 
-<수정전>
+#### 수정전
 
 ```python
 class Item(Base):
@@ -63,7 +63,7 @@ class Item(Base):
     original_price = Column(Numeric(16, 8), nullable=True)
 ```
 
-<수정후>
+#### 수정후
 
 original_price를 wholesale_price로 바꾼것이다.
 
