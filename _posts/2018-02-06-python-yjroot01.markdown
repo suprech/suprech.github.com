@@ -260,6 +260,45 @@ def update_item():
 <br>
 <br>
 
+## pytest로 디버깅하기
+다음과 같은 명령어로 실행하면 디버그모드로 실행된다.
+
+```$ pytest --pdb```
+
+
+### break point역할을 하려면
+코드에 ```assert False```를 추가해주면된다. 다음의 예제를 보자.
+아래에서 3번째줄을 보라.
+
+```python
+# update test
+post_data = {
+    'name': 'Hello',
+    'price': 1000,
+    'id': str(item.id),
+    # 'category': 'clubs/drivers'
+}
+
+res = f_client.put(url(f_wsgi, 'item.update_item'),
+                    data=json.dumps(post_data),
+                    content_type='application/json')
+assert res.status_code == 200
+
+data = json.loads(res.data.decode('utf-8'))
+assert data['name'] == 'Hello'
+assert data['price'] == 1000
+assert data['id'] == str(item.id)
+
+assert False
+
+with Database() as db:
+    item = db.query(Item).filter(Item.name == post_data['name']).one()
+    assert data['price'] == post_data['price']
+```
+
+<br>
+<br>
+
 ## fixture
 쉽게말해 pytest로 test를 할 때, DB에 이미 몇몇 정보를 넣어놓고 시작할 수 있도록 설정하는 과정이라 할 수 있다.
 conftest.py란 파일을 tests/api 폴더에 넣고 시작한다.
@@ -312,7 +351,8 @@ def f_categories(f_use_db):
 * git 사용법을 추가적으로 배움
 * DB Migration에 대해 배움
 * item api에서, item을 추가하고 업데이트 하는 기능을 구현
-* 과제를 위해, fixture설정하는법을 배움.
+* pytest로 debug하는법
+* 과제를 위해, fixture설정하는법을 배움
 
 <br>
 <br>
