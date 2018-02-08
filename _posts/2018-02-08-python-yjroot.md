@@ -54,6 +54,7 @@ alias tmux='tmux attach || tmux new'
   ```winstar/migrations/versions``` 경로로 가서 방금 생성된 revision 파일을 삭제하면 된다. 그리고 다시 autogenerate를 하자.
   * alembic 명령어 수행시, ```alembic.ini```가 있는 디렉토리에서 수행해야 함을 명심하라.
   * autogenerate된 코드를 약간 다듬은 코드는 다음과 같다.
+
 ```python
 """change name for item model: add display column,
 nullable change for price, storage
