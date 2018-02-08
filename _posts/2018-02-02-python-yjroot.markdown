@@ -3,7 +3,7 @@ layout: post
 title:  "python 1"
 date:   2018-02-02
 categories: python_web_programming
-tags: python flask web
+tags: python flask web sqlalchemy
 comments: true
 ---
 
