@@ -233,7 +233,11 @@ del post_data['parent']
 하지만, jekyll 블로그에 업로드 하기 위해서는 내 블로그의 주소도 써 주어야 한다. 다음과 같이 작성한다. 이와 관련된 도움말은 [링크][jekyll_img] 참조.
 
 ```md
-![category_table_img]({% raw %}{{https://suprech.github.io/}}{% endraw %}/images/category_table_img.png)
+![category_table_img](
+{% raw %}
+{{https://suprech.github.io/}}
+{% endraw %}
+/images/category_table_img.png)
 ```
 
 <br>
