@@ -105,6 +105,8 @@ if category is None:
     return None
 ```
 
+<br>
+
 #### ```item.py```의 ```get_category()```이해하기
 * 기본적으로 category명을 full_name형태로 집어넣어 주면, category 객체를 반환하기 위해 존재한다.
 * 예를들어, 아래의 코드에서 ```Category.parent```의 rvalue로는 category 이름이 string형태로 들어가야 한다고 생각이 들 수 있으나, category 객체 그 자체를 대입해 주어도 된다. relationship으로 설정이 되어있기 때문. 
@@ -231,7 +233,7 @@ del post_data['parent']
 하지만, jekyll 블로그에 업로드 하기 위해서는 내 블로그의 주소도 써 주어야 한다. 다음과 같이 작성한다. 이와 관련된 도움말은 [링크][jekyll_img] 참조.
 
 ```md
-![category_table_img]({{https://suprech.github.io/}}/images/category_table_img.png)
+![category_table_img]({% raw %}{{https://suprech.github.io/}}{% endraw %}/images/category_table_img.png)
 ```
 
 <br>
