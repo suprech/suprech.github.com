@@ -7,14 +7,14 @@ tags: python flask web sqlalchemy
 comments: true
 ---
 ## tmux 사용관련 tip
-### ```.zshrc```설정에 추가할부분 
+#### ```.zshrc```설정에 추가할부분 
 tmux를 그냥 키면 안돼! 그래서 shell 설정파일(```.zshrc``` 또는``` .zprofile```)에 다음을 추가한다.
 
 ```sh
 alias tmux='tmux attach || tmux new'
 ```
 
-### tmux 세션 확인하는 명령어
+#### tmux 세션 확인하는 명령어
 ```$ tmux list-sessions```
 
 <br>
@@ -109,7 +109,7 @@ if category is None:
     return None
 ```
 
-### ```item.py```의 ```get_category()```이해하기
+#### ```item.py```의 ```get_category()```이해하기
 * 기본적으로 category명을 full_name형태로 집어넣어 주면, category 객체를 반환하기 위해 존재한다.
 * 예를들어, 아래의 코드에서 ```Category.parent```의 rvalue로는 category 이름이 string형태로 들어가야 한다고 생각이 들 수 있으나, category 객체 그 자체를 대입해 주어도 된다. relationship으로 설정이 되어있기 때문. 
 
@@ -146,7 +146,9 @@ class Category(Base):
     ''' skip '''
 ```
 
-### ```add_category()``` 이해하기 - post_data의 형태의 차이
+<br>
+
+####```add_category()``` 이해하기 - post_data의 형태의 차이
 add의 경우 category 본연의 이름과, 어떤 parent를 지니고 있는지에 대한 정보가 따로온다. 즉, 다음과 같은 형태의 JSON 데이터를 post_data로 받았다고 가정하는 것이다.
 ```python
 post_data = {
@@ -206,7 +208,7 @@ return jsonify(
 즉, (blahblah) and (blahblah)는, 앞의것이 성립하면 뒤의것을 대입한다 라는 뜻이다.
 
 4. 앞으로 category를 JSON형태로 넘겨주어야 할 일이 있을때는, 반드시 ```full_name```형태로 넘겨주도록 하자. 상위 category는 다르지만 하위 category는 같은 이름일 수 있기 때문이다.
-> 예를들어 남성복/바지 와 여성복/바지는 엄연히 다른 category이지만, ```name```은 같다. 이 때문에 ```full_name```으로 구분을 해 주어야 한다.
+> 예를들어 ```남성복/바지``` 와 ```여성복/바지```는 엄연히 다른 category이지만, ```name```은 같다. 이 때문에 ```full_name```으로 구분을 해 주어야 한다.
 
 5. dictionary와 del 명령어
   * python에서 dictionary 값 하나를 날리고 싶을땐, 다음과 같이 해도 된다.
@@ -221,6 +223,20 @@ del post_data['parent']
 
 6. dictionary 설정시 맨마지막 콤마(,)는 있어도 되고 없어도 된다.
 
+7. 마크다운 이미지 업로드에 대해
+
+만약 github의 README.md같은데에 보여지기 위한 이미지라면, 레포지토리의 폴더만 상대경로로 지정해서 다음과 같이 코드를 작성하면 된다. (images라는 폴더는 프로젝트 폴더 최상위에 존재한다고 가정)
+
+```md
+![category_table_img](./images/category_table_img.png)
+```
+
+하지만, jekyll 블로그에 업로드 하기 위해서는 내 블로그의 주소도 써 주어야 한다. 다음과 같이 작성한다. 이와 관련된 도움말은 [링크][jekyll_img] 참조.
+
+```md
+![category_table_img]({{https://suprech.github.io/}}/images/category_table_img.png)
+```
+
 <br>
 <br>
 
@@ -228,11 +244,9 @@ del post_data['parent']
 모바일 클라이언트를 위한 mock api 만들기.
 메모장 등으로 글로 작성. 원하는 방식으로!
 
-다음 ui를 보고 작성하도록 하자. <br>
-[link][mobile_ui]
+다음 ui를 보고 작성하도록 하자. [링크][mobile_ui]
 
 
 [mobile_ui]: https://docs.google.com/presentation/d/1r7a0SnAxTjg3P8yY2xFEuPGjamMdhrx92pZ432qI6DI/edit?ts=5a7bb2d6#slide=id.p
 
-
-
+[jekyll_img]:https://jekyllrb-ko.github.io/docs/posts/#%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%99%80-%EC%9E%90%EC%9B%90-%EC%82%BD%EC%9E%85%ED%95%98%EA%B8%B0
