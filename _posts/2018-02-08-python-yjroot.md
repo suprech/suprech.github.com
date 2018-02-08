@@ -46,7 +46,7 @@ alias tmux='tmux attach || tmux new'
 ## 오늘 한 일
 1. ```item.py```수정
 2. category 버그 수정
-  * 버그란, 
+  * 버그란, root category를 add_category()로 추가할 때 제대로 대체가 안될 수 있었음. 그래서 추가한 기능.
 3. alembic 다시 설정
   * 지난번 revision에서 column 명 설정부분 등이 반영이 안되어서 다시 작성하였음.
   * autogenerate를 이용하였다.
@@ -144,7 +144,7 @@ class Category(Base):
 
 <br>
 
-####```add_category()``` 이해하기 - post_data의 형태의 차이
+#### ```add_category()``` 이해하기 - post_data의 형태의 차이
 add의 경우 category 본연의 이름과, 어떤 parent를 지니고 있는지에 대한 정보가 따로온다. 즉, 다음과 같은 형태의 JSON 데이터를 post_data로 받았다고 가정하는 것이다.
 ```python
 post_data = {
@@ -196,7 +196,8 @@ return jsonify(
 1. 항상 수정을 했으면 바로 Merge하지 말고 Pull Request로 올리자. 그래야 다른 사람이 Review를 해줄 수 있다.
 
 2. pytest 수행시, ```-x```옵션을 이용하면 문제가 발생한 지점 이후로는 더이상 실행하지 않고 바로 끝난다.
-사용예시 : ```$ pytest -x --pdb```
+
+    사용예시 : ```$ pytest -x --pdb```
 
 3. ```and```의 용법
 ```item.py```의 74번째 줄에 다음과 같은 코드가 등장한다.
@@ -204,7 +205,7 @@ return jsonify(
 즉, (blahblah) and (blahblah)는, 앞의것이 성립하면 뒤의것을 대입한다 라는 뜻이다.
 
 4. 앞으로 category를 JSON형태로 넘겨주어야 할 일이 있을때는, 반드시 ```full_name```형태로 넘겨주도록 하자. 상위 category는 다르지만 하위 category는 같은 이름일 수 있기 때문이다.
-> 예를들어 ```남성복/바지``` 와 ```여성복/바지```는 엄연히 다른 category이지만, ```name```은 같다. 이 때문에 ```full_name```으로 구분을 해 주어야 한다.
+    > 예를들어 ```남성복/바지``` 와 ```여성복/바지```는 엄연히 다른 category이지만, ```name```은 같다. 이 때문에 ```full_name```으로 구분을 해 주어야 한다.
 
 5. dictionary와 del 명령어
   * python에서 dictionary 값 하나를 날리고 싶을땐, 다음과 같이 해도 된다.
