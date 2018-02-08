@@ -95,6 +95,11 @@ def downgrade():
 
 ![category_table_img](./images/category_table_img.png)
 
+변경!
+
+![category_table_2]({{https://suprech.github.io/}}/images/category_table_img.png)
+
+
 * 기본적으로 category를 전달해야 할 때는, full_name형태로 전달하도록 한다.
   * category 소속 record들은 모두 full_name메서드를 이용해서, parent 정보까지 모두 전달할 수 있다.('/'로 구분된다)
 
